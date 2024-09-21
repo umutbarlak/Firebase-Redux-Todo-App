@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .header-wrapper {
+    display: grid;
+    grid-template-areas: "logo form profile";
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    grid-area: logo;
+  }
+  .form {
+    grid-area: form;
+  }
+  .profile {
+    grid-area: profile;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-wrapper {
+    grid-template-areas: "logo profile" "form form";
+    row-gap: 1rem; /* add a gap between the rows */
+  }
+}
