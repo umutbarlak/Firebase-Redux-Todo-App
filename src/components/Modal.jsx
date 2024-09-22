@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 const Modal = ({ closeModal, todo, setEditingTodo }) => {
   const dispatch = useDispatch();
   const { register, handleSubmit, setValue, getValues } = useForm();
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     if (todo) {
@@ -26,6 +27,7 @@ const Modal = ({ closeModal, todo, setEditingTodo }) => {
       setValue("importance", todo.importance);
       setValue("last_date", todo.last_date);
       setValue("id", todo.id);
+      setIsInitialized(true);
     }
   }, [setValue, todo]);
 
@@ -33,7 +35,6 @@ const Modal = ({ closeModal, todo, setEditingTodo }) => {
     if (todo) {
       dispatch(updateTodo(data));
     } else {
-      console.log(data);
       dispatch(addTodo(data));
       dispatch(getTodos());
     }
@@ -59,37 +60,40 @@ const Modal = ({ closeModal, todo, setEditingTodo }) => {
             placeholder="örn: faturaları öde"
             {...register("text")}
           />
-          <Select
-            required
-            options={statusOptions}
-            onChange={(selectedOption) =>
-              setValue("status", selectedOption.label)
-            }
-            value={statusOptions.find(
-              (option) => option.label === getValues("status")
-            )}
-          />
-          <Select
-            required
-            options={categoriesOptions}
-            // value={getValues("category")}
-            onChange={(selectedOption) =>
-              setValue("category", selectedOption.label)
-            }
-            value={categoriesOptions.find((option) => {
-              option.label === getValues("category");
-            })}
-          />
-          <Select
-            required
-            options={importanceOptions}
-            onChange={(selectedOption) =>
-              setValue("importance", selectedOption.label)
-            }
-            value={importanceOptions.find(
-              (option) => option.label === getValues("importance")
-            )}
-          />
+          {isInitialized && (
+            <>
+              <Select
+                required
+                options={statusOptions}
+                onChange={(selectedOption) => {
+                  setValue("status", selectedOption.label);
+                }}
+                defaultValue={statusOptions.find(
+                  (option) => option.value == getValues("status")
+                )}
+              />
+              <Select
+                required
+                options={categoriesOptions}
+                onChange={(selectedOption) =>
+                  setValue("category", selectedOption.label)
+                }
+                defaultValue={categoriesOptions.find(
+                  (option) => option.label == getValues("category")
+                )}
+              />
+              <Select
+                required
+                options={importanceOptions}
+                onChange={(selectedOption) =>
+                  setValue("importance", selectedOption.label)
+                }
+                defaultValue={importanceOptions.find(
+                  (option) => option.label == getValues("importance")
+                )}
+              />
+            </>
+          )}
           <input
             required
             className="border border-gray-200 px-2 py-1 rounded-md"

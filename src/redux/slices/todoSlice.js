@@ -59,9 +59,7 @@ const todoSlice = createSlice({
     });
     builder.addCase(deleteTodo.fulfilled, (state, action) => {
       state.loading = false;
-      const newTodos = state.searchTodos.filter(
-        (todo) => todo.id !== action.payload
-      );
+      const newTodos = state.todos.filter((todo) => todo.id !== action.payload);
       state.searchTodos = newTodos;
       state.todos = newTodos;
       const cat = [...new Set(state.todos.map((item) => item.category))];

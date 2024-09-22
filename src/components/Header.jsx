@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 function Header() {
   const { userEmail } = useSelector((store) => store.todos);
+
   const logout = () => {
     signOut(auth)
       .then(() => {
@@ -17,13 +18,20 @@ function Header() {
         toast.error("Lütfen tekrar deneyiniz");
       });
   };
+
   return (
     <header className="py-5 header-wrapper ">
       <h1 className="logo text-3xl md:text-5xl tracking-wider font-bold">
         ToDoS
       </h1>
-      <form className="bg-gray-200 rounded-md form flex justify-between max-md:mt-3">
-        <input className="bg-transparent px-3 py-1 outline-none" type="text" />
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-200 rounded-md form flex justify-between max-md:mt-3"
+      >
+        <input
+          className="bg-transparent px-3 py-1 outline-none flex-1"
+          type="text"
+        />
         <button className="px-3 py-1 border-l border-gray-500 rounded-r-md ">
           Search
         </button>
