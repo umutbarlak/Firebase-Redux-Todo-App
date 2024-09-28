@@ -10,6 +10,8 @@ const initialState = {
   todos: [],
   searchTodos: [],
   categories: [],
+  importance: [],
+  status: [],
   loading: false,
   error: "",
   userEmail: "",
@@ -23,6 +25,18 @@ const todoSlice = createSlice({
       console.log(action.payload);
       state.searchTodos = state.todos.filter(
         (todo) => todo.category === action.payload
+      );
+    },
+    filterImportance: (state, action) => {
+      console.log(action.payload);
+      state.searchTodos = state.todos.filter(
+        (todo) => todo.importance === action.payload
+      );
+    },
+    filterStatus: (state, action) => {
+      console.log(action.payload);
+      state.searchTodos = state.todos.filter(
+        (todo) => todo.status === action.payload
       );
     },
     getAllCategories: (state) => {
@@ -40,8 +54,11 @@ const todoSlice = createSlice({
       state.loading = false;
       state.todos = action.payload;
       state.searchTodos = action.payload;
-      const cat = [...new Set(state.todos.map((item) => item.category))];
-      state.categories = cat;
+      state.categories = [...new Set(state.todos.map((item) => item.category))];
+      state.importance = [
+        ...new Set(state.todos.map((item) => item.importance)),
+      ];
+      state.status = [...new Set(state.todos.map((item) => item.status))];
     });
     builder.addCase(getTodos.rejected, (state, action) => {
       state.loading = false;
@@ -62,8 +79,11 @@ const todoSlice = createSlice({
       const newTodos = state.todos.filter((todo) => todo.id !== action.payload);
       state.searchTodos = newTodos;
       state.todos = newTodos;
-      const cat = [...new Set(state.todos.map((item) => item.category))];
-      state.categories = cat;
+      state.categories = [...new Set(state.todos.map((item) => item.category))];
+      state.importance = [
+        ...new Set(state.todos.map((item) => item.importance)),
+      ];
+      state.status = [...new Set(state.todos.map((item) => item.status))];
     });
     builder.addCase(updateTodo.pending, (state, action) => {
       state.loading = true;
@@ -84,12 +104,21 @@ const todoSlice = createSlice({
       state.searchTodos.unshift(action.payload);
       state.todos.splice(index1, 1);
       state.todos.unshift(action.payload);
-      const cat = [...new Set(state.todos.map((item) => item.category))];
-      state.categories = cat;
+      state.categories = [...new Set(state.todos.map((item) => item.category))];
+      state.importance = [
+        ...new Set(state.todos.map((item) => item.importance)),
+      ];
+      state.status = [...new Set(state.todos.map((item) => item.status))];
     });
   },
 });
 
-export const { filterCategory, getAllCategories, userData } = todoSlice.actions;
+export const {
+  filterCategory,
+  filterImportance,
+  filterStatus,
+  getAllCategories,
+  userData,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;

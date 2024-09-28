@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <Container>
       <Header />
-      <section className="flex max-md:flex-col min-h-[calc(100vh-72px)] gap-3 py-3 relative">
+      <section className="flex max-md:flex-col min-h-[calc(100vh-88px)] gap-3 pb-3 relative">
         <LeftSide categories={categories} />
         <main className="flex-1  bg-[#D2E0FB] p-5 rounded-md ">
           <div className="flex justify-end mb-3">

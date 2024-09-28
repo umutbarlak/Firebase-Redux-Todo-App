@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import { catColors } from "../../constant";
 import { CgMenuRound } from "react-icons/cg";
-import { useDispatch } from "react-redux";
-import { filterCategory, getAllCategories } from "../../redux/slices/todoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  filterCategory,
+  filterImportance,
+  filterStatus,
+  getAllCategories,
+} from "../../redux/slices/todoSlice";
+import FilterCard from "../../components/FilterCard";
 
-const LeftSide = ({ categories }) => {
+const LeftSide = () => {
+  const { categories, importance, status } = useSelector(
+    (store) => store.todos
+  );
   const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
 
   return (
     <aside
-      className={`bg-[#8EACCD] p-3 rounded-md transition-all duration-500 ${
+      className={`bg-gray-300 p-3 rounded-md transition-all duration-500 overflow-scroll scroll-p-2 ${
         show ? "max-md:h-fit" : "max-md:h-14 justify-between"
       } ${show ? "md:w-64" : "md:w-14 justify-between"}`}
     >
@@ -27,7 +37,7 @@ const LeftSide = ({ categories }) => {
               !show && "md:hidden"
             }`}
           >
-            Categories
+            Filter
           </h3>
         </div>
         <div
@@ -35,11 +45,20 @@ const LeftSide = ({ categories }) => {
             !show && "hidden"
           }  `}
         >
-          <div>
+          <button
+            onClick={() => dispatch(getAllCategories())}
+            className={`p-1 rounded-lg capitalize text-lg tracking-wide cursor-pointer bg-gray-100 text-sky-800 hover:shadow-md`}
+          >
+            Tümü
+          </button>
+          {/* <div>
+            <h3 className={`text-2xl tracking-widest text-sky-800  `}>
+              Category
+            </h3>
             <ul className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-2">
               <li
                 onClick={() => dispatch(getAllCategories())}
-                className={`p-1 rounded-lg capitalize text-lg tracking-wide cursor-pointer bg-gray-100 text-sky-800`}
+                className={`p-1 rounded-lg capitalize text-lg tracking-wide cursor-pointer bg-gray-100 text-sky-800 hover:shadow-md`}
               >
                 Tümü
               </li>
@@ -49,15 +68,31 @@ const LeftSide = ({ categories }) => {
                   <li
                     onClick={() => dispatch(filterCategory(item))}
                     key={i}
-                    style={{ backgroundColor: bg }}
-                    className={`p-1 rounded-lg capitalize text-lg tracking-wide cursor-pointer text-sky-800`}
+                    // style={{ backgroundColor: bg }}
+                    className={`p-1 rounded-lg capitalize text-lg tracking-wide cursor-pointer text-sky-800 border hover:shadow-md`}
                   >
                     {item}
                   </li>
                 );
               })}
             </ul>
-          </div>
+          </div> */}
+          <FilterCard
+            filterArray={categories}
+            filterFunction={filterCategory}
+            title={"Category"}
+          />
+          <FilterCard
+            filterArray={importance}
+            filterFunction={filterImportance}
+            title={"Importance"}
+          />
+
+          <FilterCard
+            filterArray={status}
+            filterFunction={filterStatus}
+            title={"Status"}
+          />
         </div>
       </>
     </aside>
