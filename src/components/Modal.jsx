@@ -60,7 +60,7 @@ const Modal = ({ closeModal, todo, setEditingTodo }) => {
             placeholder="örn: faturaları öde"
             {...register("text")}
           />
-          {isInitialized && (
+          {(isInitialized || !todo) && (
             <>
               <Select
                 required

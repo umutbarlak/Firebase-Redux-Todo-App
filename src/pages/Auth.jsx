@@ -52,7 +52,7 @@ const Auth = () => {
       <div className="bg-gray-800 text-white p-10 rounded-lg w-[90vw] max-w-[500px]">
         <div className="flex justify-center">
           <h2 className="text-center text-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block  text-transparent bg-clip-text">
-            To Do
+            ToDoS
           </h2>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -81,12 +81,13 @@ const Auth = () => {
             onClick={() => setIsLogin(!isLogin)}
             className="flex -my-1"
           >
-            <span className=" text-blue-300 me-2">
+            <span className=" text-blue-500 me-2">
               {isLogin ? "Sign up" : "Log in"}
             </span>
-            to continue
+            <p className="">or continue with Google</p>
           </button>
         </form>
+
         <button
           onClick={handleGoogle}
           className="flex gap-4 items-center  rounded border border-gray-700 bg-white px-12 py-2 shadow-lg hover:shadow-xl transition duration-500 ease-in-out transform text-xl text-black mt-4 w-full justify-center"

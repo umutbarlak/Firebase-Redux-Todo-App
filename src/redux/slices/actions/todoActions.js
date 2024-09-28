@@ -5,6 +5,9 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  orderBy,
+  query,
+  serverTimestamp,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
@@ -14,8 +17,10 @@ export const getTodos = createAsyncThunk("todos/getTodos", async () => {
   const userUID = auth.currentUser.uid;
   const todosRef = collection(doc(collection(db, "users"), userUID), "todos");
 
+  const q = query(todosRef, orderBy("timestamp", "desc"));
+
   try {
-    const data = await getDocs(todosRef);
+    const data = await getDocs(q);
     const todos = data.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -32,7 +37,7 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (todo) => {
   const todosRef = doc(collection(db, "users", userUID, "todos"));
 
   try {
-    await setDoc(todosRef, todo);
+    await setDoc(todosRef, { ...todo, timestamp: serverTimestamp() });
     return todo;
   } catch (error) {
     return error.message;
@@ -62,6 +67,7 @@ export const updateTodo = createAsyncThunk("todos/updateTodo", async (todo) => {
       category: todo.category,
       importance: todo.importance,
       status: todo.status,
+      timestamp: serverTimestamp(),
     });
     return todo;
   } catch (error) {

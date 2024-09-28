@@ -31,7 +31,10 @@ export const TodoCard = ({ todo, setShowModal, setEditingTodo }) => {
       </div>
       <p className="my-2 text-lg tracking-wider"> {todo.text}</p>
       <div className="flex justify-between items-center mt-2 text-2xl">
-        <span className="text-sm">{date}</span>
+        <div className="flex justify-between items-center">
+          <span className="text-sm">{date}</span>
+          <span className="text-sm ms-2">({todo.category})</span>
+        </div>
         <div className="flex gap-3">
           <button
             onClick={() => {

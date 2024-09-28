@@ -33,6 +33,7 @@ const Home = () => {
         <LeftSide categories={categories} />
         <main className="flex-1  bg-[#D2E0FB] p-5 rounded-md ">
           <div className="flex justify-end mb-3">
+            <p>{""}</p>
             <button
               onClick={() => setShowModal(true)}
               className="bg-blue-500 px-4 py-1 rounded-md text-white"

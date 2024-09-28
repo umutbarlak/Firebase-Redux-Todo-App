@@ -25,7 +25,7 @@ function Header() {
         ToDoS
       </h1>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={""}
         className="bg-gray-200 rounded-md form flex justify-between max-md:mt-3"
       >
         <input

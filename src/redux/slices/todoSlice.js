@@ -76,12 +76,14 @@ const todoSlice = createSlice({
       const index = state.searchTodos.findIndex(
         (todo) => todo.id == action.payload.id
       );
-      const index1 = state.searchTodos.findIndex(
-        (todo) => todo.id == action.payload.id
+      const index1 = state.todos.findIndex(
+        (todo) => todo.id === action.payload.id
       );
       state.loading = false;
-      state.searchTodos[index] = action.payload;
-      state.todos[index1] = action.payload;
+      state.searchTodos.splice(index, 1);
+      state.searchTodos.unshift(action.payload);
+      state.todos.splice(index1, 1);
+      state.todos.unshift(action.payload);
       const cat = [...new Set(state.todos.map((item) => item.category))];
       state.categories = cat;
     });
