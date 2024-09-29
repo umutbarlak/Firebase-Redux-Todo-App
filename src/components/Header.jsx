@@ -24,7 +24,7 @@ function Header() {
       <h1 className="logo text-3xl md:text-5xl tracking-wider font-bold">
         ToDoS
       </h1>
-      <form
+      {/* <form
         onSubmit={""}
         className="bg-gray-200 rounded-md form flex justify-between max-md:mt-3"
       >
@@ -35,7 +35,7 @@ function Header() {
         <button className="px-3 py-1 border-l border-gray-500 rounded-r-md ">
           Search
         </button>
-      </form>
+      </form> */}
       <div className="profile relative group">
         <div className="flex justify-center items-center gap-1">
           <p className="text-xs">{userEmail}</p>

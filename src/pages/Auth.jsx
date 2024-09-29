@@ -68,7 +68,7 @@ const Auth = () => {
             defaultValue={pasword}
             onChange={(e) => setPasword(e.target.value)}
             className="py-3 px-2 outline-none text-black rounded-md"
-            type="text"
+            type="password"
           />
           <button
             type="submit"

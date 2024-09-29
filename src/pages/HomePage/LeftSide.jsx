@@ -21,8 +21,8 @@ const LeftSide = () => {
   return (
     <aside
       className={`bg-gray-300 p-3 rounded-md transition-all duration-500 overflow-scroll scroll-p-2 ${
-        show ? "max-md:h-fit" : "max-md:h-14 justify-between"
-      } ${show ? "md:w-64" : "md:w-14 justify-between"}`}
+        show ? "max-md:h-fit" : "max-md:h-14 "
+      } ${show ? "md:w-64" : "md:w-14 "}`}
     >
       <>
         <div className="flex gap-2">

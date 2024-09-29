@@ -14,7 +14,7 @@ export const TodoCard = ({ todo, setShowModal, setEditingTodo }) => {
   const date = formatDate(todo.last_date);
 
   return (
-    <div className="p-3 rounded-2xl bg-[#DEE5D4]">
+    <div className="p-3 rounded-2xl bg-[#DEE5D4] flex flex-col ">
       <div className="flex items-center justify-end gap-3 text-xs">
         <span
           style={{ background: importanceBgColor }}
@@ -29,8 +29,10 @@ export const TodoCard = ({ todo, setShowModal, setEditingTodo }) => {
           {todo.status}
         </span>
       </div>
-      <p className="my-2 text-lg tracking-wider"> {todo.text}</p>
-      <div className="flex justify-between items-center mt-2 text-2xl">
+
+      <p className="my-2 text-lg tracking-wider flex-1"> {todo.text}</p>
+
+      <div className="flex justify-between items-center mt-2 text-2xl ">
         <div className="flex justify-between items-center">
           <span className="text-sm">{date}</span>
           <span className="text-sm ms-2">({todo.category})</span>
