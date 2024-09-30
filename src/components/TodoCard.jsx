@@ -4,18 +4,15 @@ import { FiEdit } from "react-icons/fi";
 import { GoTrash } from "react-icons/go";
 import { deleteTodo } from "../redux/slices/actions/todoActions";
 import { useDispatch } from "react-redux";
-import { formatDate } from "../utils";
 
 export const TodoCard = ({ todo, setShowModal, setEditingTodo }) => {
   const dispatch = useDispatch();
   const importanceBgColor = importanceColors[todo.importance];
   const statusBgColor = statusColors[todo.status];
 
-  const date = formatDate(todo.last_date);
-
   return (
     <div className="p-3 rounded-2xl bg-[#DEE5D4] flex flex-col ">
-      <div className="flex items-center justify-end gap-3 text-xs">
+      <div className="flex items-center justify-end gap-3 text-xs text-white">
         <span
           style={{ background: importanceBgColor }}
           className="p-1 text-center rounded-md"
@@ -34,7 +31,7 @@ export const TodoCard = ({ todo, setShowModal, setEditingTodo }) => {
 
       <div className="flex justify-between items-center mt-2 text-2xl ">
         <div className="flex justify-between items-center">
-          <span className="text-sm">{date}</span>
+          <span className="text-sm">{todo.last_date}</span>
           <span className="text-sm ms-2">({todo.category})</span>
         </div>
         <div className="flex gap-3">

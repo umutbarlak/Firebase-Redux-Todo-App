@@ -8,7 +8,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { TodoCard } from "../../components/TodoCard";
 import Modal from "../../components/Modal";
-import { userData } from "../../redux/slices/todoSlice";
+import {
+  filterLastDate,
+  getAllCategories,
+  userData,
+} from "../../redux/slices/todoSlice";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -32,8 +36,21 @@ const Home = () => {
       <section className="flex max-md:flex-col min-h-[calc(100vh-88px)] gap-3 pb-3 relative">
         <LeftSide categories={categories} />
         <main className="flex-1  bg-[#D2E0FB] p-5 rounded-md ">
-          <div className="flex justify-end mb-3">
-            <p>{""}</p>
+          <div className="flex justify-between mb-3">
+            <div>
+              <button
+                onClick={() => dispatch(filterLastDate())}
+                className="bg-red-500 px-4 py-1 rounded-md text-white me-2"
+              >
+                Son Gün
+              </button>
+              <button
+                onClick={() => dispatch(getAllCategories())}
+                className="bg-green-700 px-4 py-1 rounded-md text-white"
+              >
+                Tümü
+              </button>
+            </div>
             <button
               onClick={() => setShowModal(true)}
               className="bg-blue-500 px-4 py-1 rounded-md text-white"

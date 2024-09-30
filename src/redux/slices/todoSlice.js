@@ -39,6 +39,13 @@ const todoSlice = createSlice({
         (todo) => todo.status === action.payload
       );
     },
+    filterLastDate: (state, action) => {
+      state.searchTodos = state.todos.filter(
+        (todo) =>
+          (state.searchTodos =
+            todo.last_date == new Date().toLocaleDateString())
+      );
+    },
     getAllCategories: (state) => {
       state.searchTodos = state.todos;
     },
@@ -117,6 +124,7 @@ export const {
   filterCategory,
   filterImportance,
   filterStatus,
+  filterLastDate,
   getAllCategories,
   userData,
 } = todoSlice.actions;

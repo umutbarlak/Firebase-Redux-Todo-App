@@ -12,6 +12,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { formatDate } from "../../../utils";
 
 export const getTodos = createAsyncThunk("todos/getTodos", async () => {
   const userUID = auth.currentUser.uid;
@@ -24,6 +25,7 @@ export const getTodos = createAsyncThunk("todos/getTodos", async () => {
     const todos = data.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
+      timestamp: doc.timestamp ? doc.timestamp.toDate() : null,
     }));
     return todos;
   } catch (error) {
@@ -37,7 +39,11 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (todo) => {
   const todosRef = doc(collection(db, "users", userUID, "todos"));
 
   try {
-    await setDoc(todosRef, { ...todo, timestamp: serverTimestamp() });
+    await setDoc(todosRef, {
+      ...todo,
+      timestamp: serverTimestamp(),
+      last_date: formatDate(todo.last_date),
+    });
     return todo;
   } catch (error) {
     return error.message;
