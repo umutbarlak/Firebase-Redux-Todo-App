@@ -13,6 +13,7 @@ import {
   updateTodo,
 } from "../redux/slices/actions/todoActions";
 import { useDispatch } from "react-redux";
+import { parseFormattedDate } from "../utils";
 
 const Modal = ({ closeModal, todo, setEditingTodo }) => {
   const dispatch = useDispatch();
@@ -21,11 +22,12 @@ const Modal = ({ closeModal, todo, setEditingTodo }) => {
 
   useEffect(() => {
     if (todo) {
+      console.log(parseFormattedDate(todo.last_date));
       setValue("text", todo.text);
       setValue("status", todo.status);
       setValue("category", todo.category);
       setValue("importance", todo.importance);
-      setValue("last_date", todo.last_date);
+      setValue("last_date", parseFormattedDate(todo.last_date));
       setValue("id", todo.id);
       setIsInitialized(true);
     }
@@ -33,6 +35,7 @@ const Modal = ({ closeModal, todo, setEditingTodo }) => {
 
   const onSubmit = (data) => {
     if (todo) {
+      console.log(data);
       dispatch(updateTodo(data));
     } else {
       dispatch(addTodo(data));

@@ -38,6 +38,8 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (todo) => {
   const userUID = auth.currentUser.uid;
   const todosRef = doc(collection(db, "users", userUID, "todos"));
 
+  console.log(todo.last_date);
+
   try {
     await setDoc(todosRef, {
       ...todo,
@@ -69,13 +71,13 @@ export const updateTodo = createAsyncThunk("todos/updateTodo", async (todo) => {
   try {
     await updateDoc(todoRef, {
       text: todo.text,
-      last_date: todo.last_date,
+      last_date: formatDate(todo.last_date),
       category: todo.category,
       importance: todo.importance,
       status: todo.status,
       timestamp: serverTimestamp(),
     });
-    return todo;
+    return { ...todo, last_date: formatDate(todo.last_date) };
   } catch (error) {
     return error.message;
   }

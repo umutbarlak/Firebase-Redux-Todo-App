@@ -7,3 +7,8 @@ export const formatDate = (date) => {
     .padStart(2, "0")}.${lastDate.getFullYear()}`;
   return formattedDate;
 };
+
+export const parseFormattedDate = (formattedDate) => {
+  const [day, month, year] = formattedDate.split(".");
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+};

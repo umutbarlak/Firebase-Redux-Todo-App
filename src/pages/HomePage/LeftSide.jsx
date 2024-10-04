@@ -20,7 +20,7 @@ const LeftSide = () => {
 
   return (
     <aside
-      className={`bg-gray-300 p-3 rounded-md transition-all duration-500 overflow-scroll scroll-p-2 ${
+      className={`bg-gray-300 p-3 rounded-md transition-all duration-500 overflow-scroll ${
         show ? "max-md:h-[500px]" : "max-md:h-14 "
       } ${show ? "md:w-64" : "md:w-14 "}`}
     >

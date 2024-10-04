@@ -33,9 +33,9 @@ const Home = () => {
   return (
     <Container>
       <Header />
-      <section className="flex max-md:flex-col min-h-[calc(100vh-88px)] gap-3 pb-3 relative">
+      <section className="flex max-md:flex-col md:h-[calc(100vh-88px)] gap-3 pb-3 relative">
         <LeftSide categories={categories} />
-        <main className="flex-1  bg-[#D2E0FB] p-5 rounded-md ">
+        <main className="flex-1  bg-[#D2E0FB] p-5 rounded-md overflow-scroll scroll-py-5">
           <div className="flex justify-between mb-3">
             <div>
               <button
